@@ -1,0 +1,3 @@
+so all our internal routes of the app will be kept in this (main) folder - (which itself will not be added to the route) - just to keep everything at one place and under a single layout.js so that similar styling/layout can be provided.
+
+read more about routes in next.js documentation - really helpful.

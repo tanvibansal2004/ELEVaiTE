@@ -1,0 +1,117 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  //fieldName       Type              Constraint/Relations
+  id              String           @id @default(uuid())
+  clerkUserId     String           @unique // clerk user id
+  email           String           @unique
+  name            String? // optional ('?' makes the field optional)
+  imageUrl        String?
+  industry        String? // combined industry-subindustry (e.g. "tech-software-development")
+  industryInsight IndustryInsight? @relation(fields: [industry], references: [industry])
+  // first we write "field" of the this table then "reference" of the foreign table.
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+
+  // Profile fields
+  bio        String?
+  experience Int? // years of experience
+  skills     String[] // array of skills
+
+  assessments Assessment[]
+  resume      Resume?
+  coverLetter CoverLetter[]
+}
+
+model Assessment {
+  id             String   @id @default(cuid())
+  userId         String
+  user           User     @relation(fields: [userId], references: [id])
+  quizScore      Float // overall quiz score
+  questions      Json[] // array of {question, answer, userAnswer, isCorrect}
+  category       String // "Technical", "Behavioural", etc.
+  improvementTip String? // AI generated improvement tip
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([userId]) // indexing this table with userId field.
+}
+
+model Resume {
+  id        String   @id @default(cuid())
+  userId    String   @unique // one resume per user
+  user      User     @relation(fields: [userId], references: [id])
+  content   String   @db.Text() // markdown content
+  atsScore  Float? // not working on these in this project.
+  feedback  String? // same as above.
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model CoverLetter {
+  id             String   @id @default(cuid())
+  userId         String   
+  user           User     @relation(fields: [userId], references: [id])
+  content        String // markdown content
+  jobDescription String?
+  companyName    String // name of the company applying to
+  jobTitle       String // position applying for
+  status         String   @default("draft") // draft, completed
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([userId])
+}
+
+// this table is a little complex
+model IndustryInsight {
+  id       String @id @default(cuid())
+  industry String @unique // the industry this data belongs to (e.g. "tech-software-development")
+  users    User[]
+
+  // salary data
+  salaryRanges Json[] // array of {role: string, min: float, max:float, median: float, location: string?}
+
+  // industry trends
+  growthRate  Float // industry growth rate
+  demandLevel DemandLevel // "High", "Medium", "Low"
+  topSkills   String[] // most in-demand skills
+
+  // market conditions
+  marketOutlook MarketOutlook // "Positive", "Neutral", "Negative"
+  keyTrends     String[] // array of current industry trends
+
+  // learning suggestions
+  recommendedSkills String[] // skills recommended for the industry
+
+  lastUpdated DateTime @default(now())
+  nextUpdate  DateTime // scheduled update time
+
+  @@index([industry])
+}
+
+enum DemandLevel {
+  HIGH
+  MEDIUM
+  LOW
+}
+
+enum MarketOutlook {
+  POSITIVE
+  NEUTRAL
+  NEGATIVE
+}

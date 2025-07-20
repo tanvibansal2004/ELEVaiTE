@@ -1,0 +1,1 @@
+this _components entire folder and all its files will be ignored (WON'T BE ACCOUNTED FOR AS ROUTES).

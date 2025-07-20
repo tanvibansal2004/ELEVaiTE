@@ -1,0 +1,9 @@
+these sign-in and sign-up folders are basically routes.
+to give same styling to both - they are put inside another folder.
+but we didn't want an extra route before these - therefore name of the parent folder in paranthesis.
+the folder with paranthesis basically gets ignored as a route. (IMPORTANT)
+
+the double square bracket folder inside sign-in is the catch-all route folder (clerk convention) - it is an optional route - takes care of all the options that are present along with the sign-in route. (READ MORE AT CLERK DOCUMENTATION).
+
+**important**
+so basically for every single route that we create we have this layout.js file and then we have page.js/jsx and this page.js file is what makes our route possible. 

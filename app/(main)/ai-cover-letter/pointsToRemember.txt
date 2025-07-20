@@ -1,0 +1,1 @@
+this [id] folder is for DYNAMIC ROUTES - this is those that change when some attribute changes - in this case for different cover letter ids

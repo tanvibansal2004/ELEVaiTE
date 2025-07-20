@@ -1,7 +1,6 @@
 # ELEVaiTE: Your AI-Powered Career Coach
 
-![ELEVaiTE Banner](<img width="1892" height="826" alt="image" src="https://github.com/user-attachments/assets/c6817c6b-7dc4-40c5-a332-04a9fda7e634" />
-)
+![ELEVaiTE Banner](./ELEVaiTE_Banner.png)
 
 ## 🚀 Project Overview
 
@@ -101,8 +100,7 @@ To get a local copy up and running, follow these simple steps.
 
 ## 📸 Screenshots
 
-![Resume Builder Screenshot](<img width="1893" height="828" alt="image" src="https://github.com/user-attachments/assets/3fffa6e0-8104-4fa2-b600-e058f8c6ec9e" />
-)
+![Resume Builder Screenshot](Resume_Builder.png)
 *An example of the AI-powered resume builder in action.*
 
 ## 🤝 Contributing

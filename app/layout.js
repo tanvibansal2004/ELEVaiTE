@@ -5,6 +5,7 @@ import Header from "@/components/header";
 import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 import { Toaster } from "sonner";
+import { Github } from "lucide-react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -38,7 +39,17 @@ export default function RootLayout({ children }) {
             {/* footer */}
             <footer className="bg-muted/50 py-12">
               <div className="container mx-auto px-4 text-center text-gray-400">
-                <p>designed and developed by tanvi.</p>
+                <p>
+                  <a
+                    href="https://github.com/tanvibansal2004/ELEVaiTE"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-400 hover:text-gray-300 flex items-center justify-center space-x-2"
+                  >
+                    <Github className="w-4 h-4" />
+                    <span>designed and developed by tanvi.</span>
+                  </a>
+                </p>
               </div>
             </footer>
           </ThemeProvider>
